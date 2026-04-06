@@ -1,0 +1,39 @@
+<main class="main">
+  <div class="content">
+
+      <h1>Hello, {{ title }}</h1>
+
+
+      
+  </div>
+  <button class="btn btn-success" (click)="getData()">APIDATA</button>
+  <button class="btn btn-primary" (click)="sendData()">SEND DATA</button>
+</main>
+<ng-container ngif="loadData">
+  <h2 class="text-center mb-5">Response Data</h2>
+  <!-- <pre>{{responseData$}}</pre> -->
+<table class="table table-success table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Address(ZipCode)</th>
+    </tr>
+  </thead>
+  @if(responseData$ | async; as data){
+  <tbody>
+    @for(user of data; track $index){
+    <tr class="table-striped">
+      <td>{{user.name}}</td>
+      <td>{{user.phone}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.address.street}}, {{user.address.city}}, {{user.address.zipcode}}</td>
+    </tr>
+  }
+  </tbody>
+}
+</table>
+</ng-container>
+
+<router-outlet />
